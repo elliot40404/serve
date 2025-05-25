@@ -23,4 +23,4 @@ builds:
       - -s -w
 
 archives:
-  - format: binary
+  - formats: [ 'binary' ]
