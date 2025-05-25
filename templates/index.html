@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directory Browser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="status-bar" id="statusBar"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>📁 Directory Browser</h1>
+        </div>
+
+        <div class="breadcrumb" id="breadcrumb">
+        </div>
+
+        <div class="controls">
+            <div class="sort-group">
+                <label for="sortBy">Sort by:</label>
+                <select id="sortBy">
+                    <option value="name">Name</option>
+                    <option value="size">Size</option>
+                    <option value="date">Date</option>
+                </select>
+            </div>
+
+            <div class="sort-group">
+                <label for="sortOrder">Order:</label>
+                <select id="sortOrder">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+
+            <button class="play-random-btn" id="playRandomBtn">🎲 Play Random Media</button>
+        </div>
+
+        <div class="file-list-header">
+            <div data-sort="name">Name <span class="sort-indicator">▲</span></div>
+            <div data-sort="size" class="size-header">Size <span class="sort-indicator">▲</span></div>
+            <div data-sort="date">Modified <span class="sort-indicator">▲</span></div>
+            <div data-sort="permissions" class="permissions-header">Permissions <span class="sort-indicator">▲</span>
+            </div>
+        </div>
+
+        <div class="file-list">
+            <div id="fileList">
+            </div>
+        </div>
+        <div class="go-to-top" id="goToTop">⬆️</div>
+    </div>
+
+    <script type="module" src="/static/script.js" defer></script>
+</body>
+
+</html>
