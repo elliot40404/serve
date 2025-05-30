@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -14,6 +15,7 @@ func main() {
 	dirFlag := flag.String("dir", "", "Directory to serve (default: current directory)")
 	passwordCmdFlag := flag.String("password", "", "Password to protect UI (takes precedence over SERVE_PASS env var)")
 	passFlag := flag.String("pass", "", "Alias for --password")
+	enableRandomMediaFlag := flag.Bool("enable-random-btn", false, "Enable the 'Play Random Media' feature (or set SERVE_ENABLE_RANDOM_BTN=true)")
 	flag.Parse()
 
 	rootDir := *dirFlag
@@ -44,7 +46,15 @@ func main() {
 		effectivePassword = os.Getenv("SERVE_PASS")
 	}
 
-	appServer, err := NewServer(rootDir, effectivePassword)
+	randomMediaEnabled := *enableRandomMediaFlag
+	if !randomMediaEnabled {
+		envVal := os.Getenv("SERVE_ENABLE_RANDOM_BTN")
+		if enabled, err := strconv.ParseBool(envVal); err == nil && enabled {
+			randomMediaEnabled = true
+		}
+	}
+
+	appServer, err := NewServer(rootDir, effectivePassword, randomMediaEnabled)
 	if err != nil {
 		log.Printf("Error creating server: %v", err)
 		return

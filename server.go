@@ -33,11 +33,12 @@ type Server struct {
 	template       *template.Template // For index.html
 	loginTemplate  *template.Template // For login.html
 	authEnabled    bool
+	randomBtn      bool
 	hashedPassword []byte
 	sessions       map[string]time.Time // session token -> creation time
 }
 
-func NewServer(rootDir string, password string) (*Server, error) {
+func NewServer(rootDir string, password string, enableRandomBtn bool) (*Server, error) {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create watcher: %w", err)
@@ -67,6 +68,7 @@ func NewServer(rootDir string, password string) (*Server, error) {
 		clients:   make(map[*websocket.Conn]bool),
 		watcher:   watcher,
 		broadcast: make(chan []byte),
+		randomBtn: enableRandomBtn,
 	}
 
 	if password != "" {

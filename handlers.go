@@ -137,7 +137,10 @@ func logRequest(next http.Handler) http.Handler {
 }
 
 func handleIndex(s *Server, w http.ResponseWriter, _ *http.Request) {
-	err := s.template.Execute(w, nil)
+	data := map[string]any{
+		"RandomMediaEnabled": s.randomBtn,
+	}
+	err := s.template.Execute(w, data)
 	if err != nil {
 		log.Printf("Template error on /: %v", err)
 		http.Error(w, "Error rendering template", http.StatusInternalServerError)

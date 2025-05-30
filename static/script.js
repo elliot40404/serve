@@ -349,6 +349,15 @@ document.addEventListener("DOMContentLoaded", function () {
   loadDirectory(currentPath);
   initWebSocket();
 
+  const controls = document.getElementById("controls");
+  const randomMediaEnabled =
+    document.body.dataset.randomMediaEnabled === "true";
+  if (randomMediaEnabled) {
+    if (controls) controls.style.display = "flex";
+  } else {
+    if (controls) controls.style.display = "none";
+  }
+
   document.body.addEventListener("click", function (event) {
     const target = event.target.closest("a.nav-link");
     if (target && target.hasAttribute("data-path")) {

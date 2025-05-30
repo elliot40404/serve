@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
-<body>
+<body data-random-media-enabled="{{.RandomMediaEnabled}}">
     <div class="status-bar" id="statusBar"></div>
 
     <div class="container">
@@ -23,7 +23,7 @@
         <div class="breadcrumb" id="breadcrumb">
         </div>
 
-        <div class="controls">
+        <div class="controls" style="display: none;" id="controls">
             <div class="sort-group">
                 <label for="sortBy">Sort by:</label>
                 <select id="sortBy">
